@@ -1,2 +1,2 @@
-# optimization_methods
-Compilation of my own interpretation of some optimization methods
+# Optimization Methods
+Compilation of my own take on some optimization methods, having the BBOB <https://github.com/numbbo/coco> as benchmark.
