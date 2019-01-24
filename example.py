@@ -2,7 +2,7 @@ import solvers
 import testFunctions as tf
 from animation import animation, animation3D
 
-
-alh = solvers.pso(50, 100, 2, tf.ackley_function, -10, 10)
-animation(alh.history(), tf.ackley_function, -10, 10)
-animation3D(alh.history(), tf.ackley_function, -10, 10)
+func = tf.ackley_function
+alh = solvers.pso(50, 300, 2, func, -10, 10)
+animation(alh.history(), func, -10, 10)
+# animation3D(alh.history(), func, -10, 10)

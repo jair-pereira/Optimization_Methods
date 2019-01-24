@@ -6,6 +6,12 @@ import numpy as np
 import pandas as pd
 
 
+###### workaround for high dpi display + windows ###### 190124
+from sys import platform
+if platform == "win32":
+	matplotlib.rcParams['figure.dpi'] = 250  
+#######################################################
+
 def animation(agents, function, lb, ub, sr=False):
 
     side = np.linspace(lb, ub, (ub - lb) * 5)
