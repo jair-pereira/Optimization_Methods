@@ -4,7 +4,7 @@ class de():
     """
     Diferencial Evolution
     """
-    def __init__(self, n, iteration, dimension, function, lb, ub, beta, pr):
+    def __init__(self, n, iteration, dimension, function, lb, ub, beta=0.5, pr=0.1):
         """
         :param n: number of candidate solutions
         :param iteration: the number of iterations
