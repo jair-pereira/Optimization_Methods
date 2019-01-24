@@ -4,7 +4,7 @@ class pso():
     """
     Particle Swarm Optmization
     """
-    def __init__(self, n, iteration, dimension, function, lb, ub, w, c1, c2):
+    def __init__(self, n, iteration, dimension, function, lb, ub, w=0.5, c1=1, c2=1):
         """
         :param n: number of candidate solutions
         :param iteration: the number of iterations

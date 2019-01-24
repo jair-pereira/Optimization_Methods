@@ -4,7 +4,7 @@ class sa():
     """
     Simulated Annealing
     """
-    def __init__(self, n, dimension, function, lb, ub, T):
+    def __init__(self, n, dimension, function, lb, ub, T=[1, 0.1, 0.05]):
         """
         :param n: number of candidate solutions
         :param dimension: space dimension
