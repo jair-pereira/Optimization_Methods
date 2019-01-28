@@ -68,8 +68,8 @@ class de():
         idx = np.arange(x.shape[0])
 
         for i in range(x.shape[0]):
-            j = np.random.choice(np.delete(idx, i), 2, replace=False)
-            u[i] = x[i] + beta*(x[j[0]] - x[j[1]])
+            j = np.random.choice(np.delete(idx, i), 3, replace=False)
+            u[i] = x[j[0]] + beta*(x[j[1]] - x[j[2]])
             
         return u
     
