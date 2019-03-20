@@ -25,10 +25,10 @@ targetRunner = "./target-runner_ga"
 
 ## The maximum number of runs (invocations of targetRunner) that will performed. It
 ## determines the (maximum) budget of experiments for the tuning.
-maxExperiments = 5000
+maxExperiments = 2000
 
-## Number of iterations.
-nbIterations = 5
+## Number of iterations. Default 2+log_2(number_parameters)
+nbIterations = 0
 
 ## Number of calls to targetRunner to execute in parallel. Values 0 or 1
 ## mean no parallelization.
