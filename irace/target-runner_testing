@@ -12,8 +12,8 @@
 # RETURN VALUE:
 # This script should print a single numerical value (the value to be minimized).
 ###############################################################################
-EXE=~python ./call_pso.py
+#EXE=~python ./call_pso.py
 
-$EXE " --nfe 1e+1 " --n "$5" --w "$6" --c1 "$7" --c2 "$8" " --bbob function_indices:1 dimensions:2 instance_indices:1"
+python call_pso.py --nfe 1e+1 --n $5 --w $6 --c1 $7 --c2 $8 --bbob "function_indices:1 dimensions:2 instance_indices:1"
 
 exit 0
