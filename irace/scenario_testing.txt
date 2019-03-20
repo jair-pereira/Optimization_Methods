@@ -13,7 +13,7 @@ execDir = "./"
 
 ## File to save tuning results as an R dataset, either absolute path or
 ## relative to execDir.
-logFile = "./irace_pso_190320.Rdata"
+logFile = "./irace_testing_190320.Rdata"
 
 ## Directory where tuning instances are located, either absolute path or
 ## relative to current directory.
@@ -21,11 +21,11 @@ logFile = "./irace_pso_190320.Rdata"
 
 ## Script called for each configuration that executes the target algorithm
 ## to be tuned. See templates.
-targetRunner = "./target-runner_pso"
+targetRunner = "./target-runner_testing"
 
 ## The maximum number of runs (invocations of targetRunner) that will performed. It
 ## determines the (maximum) budget of experiments for the tuning.
-maxExperiments = 5000
+maxExperiments = 1000
 
 ## Number of iterations.
 nbIterations = 4
