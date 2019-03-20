@@ -12,8 +12,6 @@
 # RETURN VALUE:
 # This script should print a single numerical value (the value to be minimized).
 ###############################################################################
-EXE=~python ./call_de.py
-
-$EXE " --nfe 1e+5 " --n "$5" --beta "$6" --pr "$7" " --bbob function_indices:1,15 dimensions:10 instance_indices:1-10"
+python call_de.py --nfe 4e+3 --n $5 --beta $6 --pr $7 --bbob "function_indices:1,15 dimensions:10 instance_indices:1-10"
 
 exit 0
