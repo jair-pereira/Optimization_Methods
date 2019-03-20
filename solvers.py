@@ -47,8 +47,8 @@ def ga(n, my_func, bounds, dimension, max_nfe, k, alpha, pr):
     
     while Solution.nfe < max_nfe:
         #Round 1
-        S1 = op.select_tournament(X, n=1, k=k)
-        S2 = op.select_tournament(X, n=1, k=k)
+        S1 = op.select_tournament(X, n=1, k=int(k))
+        S2 = op.select_tournament(X, n=1, k=int(k))
         U  = op.w_crx_blend2(S1, S2, alpha)
         X  = op.replace_if_best(X, U)
         #Round 2
@@ -72,7 +72,7 @@ def cs(n, my_func, bounds, dimension, max_nfe, pr, k):
         U  = op.w_levy_flight(S)
         X  = op.replace_if_random(X, U)
         
-        X = op.drop_worst(X, pr, k)
+        X = op.drop_worst(X, pr, int(k))
         
         [Xi.getFitness() for Xi in X]
     return Solution
