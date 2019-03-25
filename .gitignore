@@ -1,3 +1,12 @@
 
 *.pyc
 *.ipynb
+*.info
+*.tdat
+*.rdat
+*.dat
+*.html
+*.tex
+*.svg
+*.pdf
+*.js

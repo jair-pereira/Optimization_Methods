@@ -76,3 +76,70 @@ def cs(n, my_func, bounds, dimension, max_nfe, pr, k):
         
         [Xi.getFitness() for Xi in X]
     return Solution
+    
+def ge_190325_01(n, my_func, bounds, dimension, max_nfe):
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_current(U)
+        U = op.w_pso(S1, w=0.75, c1=0.25, c2=1.00)
+        X  = op.replace_if_random(X, U)
+        #Round 2
+        S1 = op.select_tournament(U, n=1, k=int(n*0.50))
+        S2 = op.select_random(X, 1)
+        S3 = op.select_current(X)
+        U  = op.w_mut_de(S1, S2, S3, beta=0.50)
+        X  = op.replace_if_best(X, U)
+        #Round 3
+        S1 = op.select_current(U)
+        U  = op.w_pso(S1, w=0.50, c1=0.25, c2=0.00)
+        X  = op.replace_if_random(X, U)
+        [Xi.getFitness() for Xi in X]
+    return X
+    
+def ge_190325_02(n, my_func, bounds, dimension, max_nfe):
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_tournament(U, n=1, k=1)
+        U  = op.w_pso(S1, w=0.25, c1=0.00, c2=0.75)
+        X  = U
+        #Round Drop
+        X = op.drop_worst(X, pr=0.10, k=int(n*0.25)) 
+        [Xi.getFitness() for Xi in X]
+    return X
+    
+def ge_190325_03(n, my_func, bounds, dimension, max_nfe):
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_truncate
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_tournament(U, n=1, k=int(n*0.25))
+        S2 = op.select_random(X, 1)
+        U  = op.w_crx_exp2(S1, S2, pr=0.75)
+        X  = op.replace_if_random(X, U)
+        #Round 2
+        S1 = op.select_random(U, 1)
+        S2 = op.select_random(X, 1)
+        S3 = op.select_current(U)
+        U  = op.w_mut_de(S1, S2, S3, beta=0.50)
+        X  = U
+        [Xi.getFitness() for Xi in X]
+    return X
