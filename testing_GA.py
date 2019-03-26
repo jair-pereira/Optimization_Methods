@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import sys, pickle
+import sys, pickle, datetime
 import cocoex, cocopp
 from solvers import pso, de, cs, ga
 
@@ -15,5 +15,7 @@ for problem in suite:
     max_nfe = nfe_base*problem.dimension
     
     ga(400,  problem, (problem.lower_bounds[0], problem.upper_bounds[0]), problem.dimension, max_nfe, k=25, alpha=0.07, pr=0.79)
+    
+    print(problem.id, " finished at ",datetime.datetime.now())
     
 cocopp.main(observer.result_folder)
