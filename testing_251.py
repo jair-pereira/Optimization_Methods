@@ -5,7 +5,7 @@ import cocoex, cocopp
 from solvers import ge_190320_01, ge_190320_02, ge_190320_03, ge_190325_01, ge_190325_03
 
 output_folder = "GE190325_01_190327"
-nfe_base = 1e+5
+nfe_base = 1e+4
 
 observer = cocoex.Observer("bbob", "result_folder: " + output_folder)
 

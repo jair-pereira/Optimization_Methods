@@ -5,7 +5,7 @@ import cocoex, cocopp
 from solvers import pso, de, cs, ga
 
 output_folder = "PSO_190327"
-nfe_base = 1e+5
+nfe_base = 1e+4
 
 observer = cocoex.Observer("bbob", "result_folder: " + output_folder)
 
