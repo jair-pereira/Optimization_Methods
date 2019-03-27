@@ -77,7 +77,7 @@ def cs(n, my_func, bounds, dimension, max_nfe, pr, k):
         [Xi.getFitness() for Xi in X]
     return Solution
     
-def ge_190325_01(n, my_func, bounds, dimension, max_nfe):
+def ge_190320_01(n, my_func, bounds, dimension, max_nfe):#n=100
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
     Solution.repair = op.repair_random
     X = Solution.initialize(n)
@@ -103,7 +103,7 @@ def ge_190325_01(n, my_func, bounds, dimension, max_nfe):
         [Xi.getFitness() for Xi in X]
     return X
     
-def ge_190325_02(n, my_func, bounds, dimension, max_nfe):
+def ge_190320_02(n, my_func, bounds, dimension, max_nfe):#n=50
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
     Solution.repair = op.repair_random
     X = Solution.initialize(n)
@@ -121,7 +121,7 @@ def ge_190325_02(n, my_func, bounds, dimension, max_nfe):
         [Xi.getFitness() for Xi in X]
     return X
     
-def ge_190325_03(n, my_func, bounds, dimension, max_nfe):
+def ge_190320_03(n, my_func, bounds, dimension, max_nfe):#n=100
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
     Solution.repair = op.repair_truncate
     X = Solution.initialize(n)
@@ -143,3 +143,37 @@ def ge_190325_03(n, my_func, bounds, dimension, max_nfe):
         X  = U
         [Xi.getFitness() for Xi in X]
     return X
+    
+def ge_190325_01(n, my_func, bounds, dimension, max_nfe):#n=50
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_current(X)
+        U  = op.w_pso(S1, w=0.50, c1=0.00, c2=2.00)
+        X  = op.replace_if_random(X, U)
+        #Round Drop
+        X = op.drop_probability(X, pr=0.25)
+        [Xi.getFitness() for Xi in X]
+    return X
+    
+def ge_190325_03(n, my_func, bounds, dimension, max_nfe):#n=200
+Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_random(U, 1)
+        U  = op.w_pso(S1, w=0.00, c1=0.00, c2=2.00)
+        X  = U
+        [Xi.getFitness() for Xi in X]
+    return X    

@@ -4,8 +4,8 @@ import sys, pickle, datetime
 import cocoex, cocopp
 from solvers import pso, de, cs, ga
 
-output_folder = "CS_190326"
-nfe_base = 1e+6
+output_folder = "CS_190327"
+nfe_base = 1e+5
 
 observer = cocoex.Observer("bbob", "result_folder: " + output_folder)
 

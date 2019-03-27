@@ -2,10 +2,10 @@ import numpy as np
 import pandas as pd
 import sys, pickle, datetime
 import cocoex, cocopp
-from solvers import ge_190325_01, ge_190325_02, ge_190325_03
+from solvers import ge_190320_01, ge_190320_02, ge_190320_03, ge_190325_01, ge_190325_03
 
-output_folder = "GE190325_03_190326"
-nfe_base = 1e+6
+output_folder = "GE190320_02_190327"
+nfe_base = 1e+5
 
 observer = cocoex.Observer("bbob", "result_folder: " + output_folder)
 
@@ -14,7 +14,7 @@ for problem in suite:
     problem.observe_with(observer)
     max_nfe = nfe_base*problem.dimension
     
-    ge_190325_03(100,   problem, (problem.lower_bounds[0], problem.upper_bounds[0]), problem.dimension, max_nfe)
+    ge_190320_02(50,  problem, (problem.lower_bounds[0], problem.upper_bounds[0]), problem.dimension, max_nfe)
     
     print(problem.id, " finished at ",datetime.datetime.now())
     
