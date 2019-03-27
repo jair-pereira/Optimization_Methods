@@ -163,7 +163,7 @@ def ge_190325_01(n, my_func, bounds, dimension, max_nfe):#n=50
     return X
     
 def ge_190325_03(n, my_func, bounds, dimension, max_nfe):#n=200
-Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
     Solution.repair = op.repair_random
     X = Solution.initialize(n)
     for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
