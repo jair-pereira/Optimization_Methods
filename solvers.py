@@ -176,4 +176,25 @@ def f281(n, my_func, bounds, dimension, max_nfe, k_1, k_2, beta):
         U  = op.w_mut_de(S1, S2, S3, beta)
         X  = U
         [Xi.getFitness() for Xi in X]
-    return Solution    
+    return Solution
+    
+def f282(n, my_func, bounds, dimension, max_nfe, k, pr, alpha):
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_tournament(X, n=1, k=int(k))
+        U = op.w_mut_uni(S1, pr)
+        X  = U
+        #Round 2
+        S1 = op.select_random(U, 1)
+        S2 = op.select_current(X)
+        U  = op.w_crx_blend2(S1, S2, alpha)
+        X  = U
+        [Xi.getFitness() for Xi in X]
+    return Solution
