@@ -77,7 +77,7 @@ def cs(n, my_func, bounds, dimension, max_nfe, pr, k):
         [Xi.getFitness() for Xi in X]
     return Solution
     
-def f201(n, my_func, bounds, dimension, max_nfe, r1w, r1c1, r1c2, r2k, r2beta, r3w, r3c1, r3c2):
+def f201(n, my_func, bounds, dimension, max_nfe, w_1, c1_1, c2_1, k, beta, w_2, c1_2, c2_2):
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
     Solution.repair = op.repair_random
     X = Solution.initialize(n)
@@ -88,7 +88,7 @@ def f201(n, my_func, bounds, dimension, max_nfe, r1w, r1c1, r1c2, r2k, r2beta, r
         U = X
         #Round 1
         S1 = op.select_current(U)
-        U = op.w_pso(S1, w, c1, c2)
+        U = op.w_pso(S1, w_1, c1_1, c2_1)
         X  = op.replace_if_random(X, U)
         #Round 2
         S1 = op.select_tournament(U, n=1, k=k)
@@ -98,7 +98,7 @@ def f201(n, my_func, bounds, dimension, max_nfe, r1w, r1c1, r1c2, r2k, r2beta, r
         X  = op.replace_if_best(X, U)
         #Round 3
         S1 = op.select_current(U)
-        U  = op.w_pso(S1, w, c1, c2)
+        U  = op.w_pso(S1, w_2, c1_2, c2_2)
         X  = op.replace_if_random(X, U)
         [Xi.getFitness() for Xi in X]
     return X
