@@ -101,7 +101,7 @@ def f201(n, my_func, bounds, dimension, max_nfe, w_1, c1_1, c2_1, k, beta, w_2, 
         U  = op.w_pso(S1, w_2, c1_2, c2_2)
         X  = op.replace_if_random(X, U)
         [Xi.getFitness() for Xi in X]
-    return X
+    return Solution
     
 def f203(n, my_func, bounds, dimension, max_nfe, k, pr, beta):
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
@@ -124,7 +124,7 @@ def f203(n, my_func, bounds, dimension, max_nfe, k, pr, beta):
         U  = op.w_mut_de(S1, S2, S3, beta)
         X  = U
         [Xi.getFitness() for Xi in X]
-    return X
+    return Solution
     
 def f251(n, my_func, bounds, dimension, max_nfe, w, c1, c2, pr):
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
@@ -142,7 +142,7 @@ def f251(n, my_func, bounds, dimension, max_nfe, w, c1, c2, pr):
         #Round Drop
         X = op.drop_probability(X, pr)
         [Xi.getFitness() for Xi in X]
-    return X
+    return Solution
     
 def f253(n, my_func, bounds, dimension, max_nfe, w, c1, c2):
     Solution.setProblem(my_func, bounds, dimension, maximize=False)
@@ -158,4 +158,4 @@ def f253(n, my_func, bounds, dimension, max_nfe, w, c1, c2):
         U  = op.w_pso(S1, w, c1, c2)
         X  = U
         [Xi.getFitness() for Xi in X]
-    return X
+    return Solution

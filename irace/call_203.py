@@ -24,7 +24,7 @@ def main(args):
     suite = cocoex.Suite("bbob", "", args.bbob)
     fitness = 0
     for problem in suite:
-        sol = f203(args.n, problem, (problem.lower_bounds[0], problem.upper_bounds[0]), problem.dimension, args.nfe, args.k, args.pr, args.beta)
+        sol = f203(int(args.n), problem, (problem.lower_bounds[0], problem.upper_bounds[0]), problem.dimension, int(args.nfe), int(args.k), args.pr, args.beta)
         
         fitness += np.abs(sol.best.getFitness() - targets[problem.id])
     print(fitness)
