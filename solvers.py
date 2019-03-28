@@ -159,3 +159,21 @@ def f253(n, my_func, bounds, dimension, max_nfe, w, c1, c2):
         X  = U
         [Xi.getFitness() for Xi in X]
     return Solution
+    
+def f281(n, my_func, bounds, dimension, max_nfe, k_1, k_2, beta):
+    Solution.setProblem(my_func, bounds, dimension, maximize=False)
+    Solution.repair = op.repair_random
+    X = Solution.initialize(n)
+    for Xi in X:    Xi.setX(op.init_random(*Solution.bounds, Solution.dimension))
+    [Xi.getFitness() for Xi in X]
+    Solution.updateHistory(X)
+    while Solution.nfe < max_nfe:
+        U = X
+        #Round 1
+        S1 = op.select_tournament(U, n=1, k=int(k_1))
+        S2 = op.select_tournament(U, n=1, k=int(k_2))
+        S3 = op.select_random(U, 1)
+        U  = op.w_mut_de(S1, S2, S3, beta)
+        X  = U
+        [Xi.getFitness() for Xi in X]
+    return Solution    
