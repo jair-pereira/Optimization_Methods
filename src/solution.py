@@ -11,6 +11,7 @@ class Solution(object):
         Solution.bounds    = bounds
         Solution.dimension = dimension
         Solution.nfe       = 0
+        Solution.other_stop_condition = 0
         #common attributes
         Solution.best      = None
         Solution.worst     = None
@@ -21,6 +22,7 @@ class Solution(object):
         #Log
         Solution._log     = None
         Solution.evaluate = Solution._evaluate
+        Solution.count_repair = 0
         
     @staticmethod
     def setLogger(Log):
@@ -44,14 +46,12 @@ class Solution(object):
         #pso attributes
         self.pbest    = {}#{'x': None, 'fitness': None}
         self.velocity = np.zeros(Solution.dimension)
-        #bee attributes
-        self.age  = 0
-        self.rank = None
         
     def setX(self, x):
-        # self.x = x
-        # self.x = np.clip(x, *self.bounds)
-        self.x = Solution.repair(x, *Solution.bounds)
+        self.x        = Solution.repair_x(x, *Solution.bounds)
+        if(np.array_equal(self.x, x)):
+            Solution.count_repair += 1
+            self.velocity = Solution.repair_v(self.velocity, self.x, x, *Solution.bounds)            
         self.clearFitness()
         
     def setVelocity(self, v):
@@ -85,9 +85,14 @@ class Solution(object):
             self.pbest['fitness'] = self.fitness
         
     @staticmethod
-    def repair(x, lb, ub):
+    def repair_x(x, lb, ub):
         #this method should be replaced on the fly
         return x
+        
+    @staticmethod
+    def repair_v(v, x, x1, lb, ub):
+        #this method should be replaced on the fly
+        return v
     
     @staticmethod
     def updateBest(Xi):

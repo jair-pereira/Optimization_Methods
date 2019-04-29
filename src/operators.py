@@ -6,6 +6,16 @@ from .solution import *
 def init_random(lb, ub, dimension):
     return np.random.uniform(lb, ub, dimension)
     
+def init_zero(lb, ub, dimension):
+    return np.zeros(dimension)
+
+def init_small_random(x, f, dimension):
+    return np.random.uniform(-f, +f, dimension)
+
+#velocity initialization
+def initv_half_dif(x, lb, ub, dimension):
+    return (np.random.uniform(lb, ub, dimension) - x)/2
+    
 ### SELECTION METHODS (INPUT) ###
 def select_random(X, n=1):
     ''' Selects n exclusively and randomly candidate solutions from X for each Xi in X
@@ -156,8 +166,8 @@ def w_crx_exp2(S1, S2, pr):
     
     for i in range(len(U)):
         U[i].setX(u[i,0])
-        U[i].setVelocity(S1[i,0].velocity)
-        U[i].pbest = S1[i,0].pbest
+        # U[i].setVelocity(S1[i,0].velocity)
+        # U[i].pbest = S1[i,0].pbest
     
     return U
     
@@ -177,9 +187,10 @@ def crx_exponential(x1, x2, pr):
         i = i + 1
         mask[i%size] = True
 
-    u, v = crx_exchange_points(x1, x2, mask)
+    #u, v = crx_exchange_points(x1, x2, mask)
+    u = crx_exchange_points(x1, x2, mask)
 
-    return u, v
+    return u#, v
 
 # exchange points
 def crx_exchange_points(x1, x2, points):
@@ -191,12 +202,12 @@ def crx_exchange_points(x1, x2, points):
     :returns: (np.array, np.array)
     '''
     u = np.array([_ for _ in x1])
-    v = np.array([_ for _ in x2])
+    #v = np.array([_ for _ in x2])
     
     u[points] = x2[points]
-    v[points] = x1[points]
+    #v[points] = x1[points]
     
-    return u, v
+    return u#, v
 
 # wrapper 2children
 def w_crx_uni2(S1, S2, pr):    
@@ -479,6 +490,19 @@ def repair_reflect(x, lb, ub):
 
     return u
 
+#repair velocity
+def repair_v_zero(v, x, x1, lb, ub):
+    u = np.array([xi for xi in x])
+    mask = (u<lb) + (u>ub)
+    
+    w = np.array([vi for vi in v])
+    w[mask] = 0
+
+    return w
+    
+def repair_v_diff(v, x, x1, lb, ub):
+    return x1-x
+    
 ### KEEP-RULE / UPDATE-RULE ###
 ## REPLACE IF IMPROVED
 def replace_if_best(X1, X2):
